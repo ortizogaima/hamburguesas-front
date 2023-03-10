@@ -2,15 +2,22 @@
   <div class="burger-component">
     <transition name="modal"> 
       <div v-if="isOpen">
-        <div class="overlay" @click.self="isOpen = false;">
+        <div class="overlay" @click.self="reset()">
           <div class="modal">
-            <h1>Hamburguesa: {{burger.nombre}}</h1>
-            <h2>Ingredientes:</h2>
-            <h3 v-for="ingrediente in burger.ingredientes" v-bind:key="(ingrediente)">{{ingrediente}}</h3>
-            <h2>Calorias: {{burger.calorias}}</h2>
-            <button @click="isOpen=false">Borrar</button>
-            <button @click="isOpen=false">Editar</button>
-            <button @click="isOpen=false">Salir</button>
+            <div v-if="modalAsk==false">
+              <h1>Hamburguesa: {{burger.nombre}}</h1>
+              <h2>Ingredientes:</h2>
+              <h3 v-for="ingrediente in burger.ingredientes" v-bind:key="(ingrediente)">{{ingrediente}}</h3>
+              <h2>Calorias: {{burger.calorias}}</h2>
+              <button @click="modalAsk=true">Borrar</button>
+              <button @click="isOpen=false">Editar</button>
+              <button @click="reset()">Salir</button>
+            </div>
+            <div v-if="modalAsk">
+              <h1>¿Estas seguro de querer borrar la hamburguesa {{burger.nombre}}?</h1>
+              <button @click="clearBurger()">Aceptar</button>
+              <button @click="reset()">Salir</button>
+            </div>
           </div>
         </div>
       </div>
@@ -22,15 +29,32 @@
 
 
 <script>
+import {useRouter} from 'vue-router'
 
 export default {
   name: 'BurgerComponent',
   props: ['burger'],
   data() {
     return {
-      isOpen: false
+      route: useRouter(),
+      isOpen: false,
+      modalAsk: false
     };
   },
+  methods: {
+    reset(){
+      this.isOpen = false
+      this.modalAsk = false
+    },
+    clearBurger(){
+      fetch('https://hamburguesas-back.elevadev.cl/burger/'+this.burger.id,{
+      method: 'DELETE',
+      }).then((res) => console.log(res))
+      console.log("Burger Delete")
+      this.reset()
+    },
+    
+  }
 }
 </script>
 
