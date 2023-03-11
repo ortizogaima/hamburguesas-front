@@ -5,32 +5,35 @@
         <div v-if="isOpenModal">
         <div class="overlay" @click.self="isOpenModal = false;">
           <div class="modal">
-          <form @submit="setBurger" v-if="isSent">
-            <label for="">Nombre de la hamburguesa: </label>
-            <input type="text" v-model="burger.name" required>
+          <form @submit="setBurger">
+            <label >Nombre de la hamburguesa</label>
             <br/>
-            <label for="">Primer ingrediente: </label>
-            <input type="text" v-model="burger.ingredients[0]" required>
+            <input class="field" type="text" v-model="burger.name" required>
             <br/>
-            <label for="">Segundo ingrediente: </label>
-            <input type="text" v-model="burger.ingredients[1]">
+            <label >Primer ingrediente</label>
             <br/>
-            <label for="">Tercer ingrediente: </label>
-            <input type="text" v-model="burger.ingredients[2]">
+            <input class="field" type="text" v-model="burger.ingredients[0]" required>
             <br/>
-            <label for="">Cuarto ingrediente: </label>
-            <input type="text" v-model="burger.ingredients[3]">
+            <label >Segundo ingrediente</label>
             <br/>
-            <label for="">Calorias: </label>
-            <input type="number" v-model="burger.calories" required>
+            <input class="field" type="text" v-model="burger.ingredients[1]">
+            <br/>
+            <label >Tercer ingrediente</label>
+            <br/>
+            <input class="field" type="text" v-model="burger.ingredients[2]">
+            <br/>
+            <label >Cuarto ingrediente</label>
+            <br/>
+            <input class="field" type="text" v-model="burger.ingredients[3]">
+            <br/>
+            <label >Calorias</label>
+            <br/>
+            <input class="field" type="number" v-model="burger.calories" required>
             <br/>
             <input class="button" type="submit" value="Enviar">
+            <br/>
             <button @click="isOpenModal=false">Cancelar</button>
           </form>
-          <div class="burgerSent" v-if="!isSent">
-            <h1>Se envio la hamburguesa correctamente</h1>
-            <button @click="isOpenModal=false">Salir</button>
-          </div>
           </div>
         </div>
         </div>
@@ -55,7 +58,6 @@ export default {
   methods: {
     reset(){
       this.isOpenModal = !this.isOpenModal
-      this.isSent = !this.isSent
       this.burger.name = ''
       this.burger.ingredients = []
       this.burger.calories = null
@@ -107,7 +109,7 @@ button:active{
   margin: 0px auto;
   padding: 20px;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px 3px;
   transition: all 0.2s ease-in;
   font-family: Helvetica, Arial, sans-serif;
@@ -138,5 +140,16 @@ button:active{
   background: #00000094;
   z-index: 999;
   transition: opacity 0.2s ease;
+}
+
+.field{
+  border: solid 1px #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+
+}
+label{
+  padding: 10px;
 }
 </style>

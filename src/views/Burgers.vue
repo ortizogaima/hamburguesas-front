@@ -1,7 +1,7 @@
 <template>
   <div class="burgers-viables">
     <div  class="burger-links">
-      <h1>The burgers avaible!</h1>
+      <h1>Hamburguesas disponibles!</h1>
       <ul class="burger-list">
         <li v-for="burger in burgers" v-bind:key="(burger.id)">
           <BurgerComponent  :burger="burger" />

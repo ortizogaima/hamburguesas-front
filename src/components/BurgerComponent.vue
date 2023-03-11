@@ -10,7 +10,6 @@
               <h3 v-for="ingrediente in burger.ingredientes" v-bind:key="(ingrediente)">{{ingrediente}}</h3>
               <h2>Calorias: {{burger.calorias}}</h2>
               <button @click="modalAsk=true">Borrar</button>
-              <button @click="isOpen=false">Editar</button>
               <button @click="reset()">Salir</button>
             </div>
             <div v-if="modalAsk">
@@ -64,7 +63,7 @@ export default {
   margin: 0px auto;
   padding: 20px;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px 3px;
   transition: all 0.2s ease-in;
   font-family: Helvetica, Arial, sans-serif;
